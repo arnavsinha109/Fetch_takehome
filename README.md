@@ -186,15 +186,15 @@ docker-compose up --force-recreate
  ```
 ## Additional thoughts and comments on Deployment and Production Readiness Strategies
 * One possible deployment strategy for this application it to deploy the container app on AWS Fargate clusters using AWS ECS (Elastic Container Service)
-* The app would perform the same basic functions with more finesse
-* Other Components to be added -
-    * More queue worker instances for faster processing
-    * Dead Letter Queues to store messages that were unsuccefully dequeued multiple times but could not be processed to stop them from blocking the queue
-    * Heath check capabilities
-        * Monitoring
-        * Logging
-        * CloudWatch Dashboards
-        * Alert system to generate alert in case some service goes down
+    * The app would perform the same basic functions with more finesse
+    * Other Components to be added -
+        * More queue worker instances for faster processing
+        * Dead Letter Queues to store messages that were unsuccefully dequeued multiple times but could not be processed to stop them from blocking the queue
+        * Heath check capabilities
+            * Monitoring
+            * Logging
+            * CloudWatch Dashboards
+            * Alert system to generate alert in case some service goes down
 * We could use queue based scaling as a scale out strategy
    * In case the size of the queue increases because of increase in dataflow, we can configure the Fargate app to scale out to handle the increase in data
 * PII data handling could be done by storing it in secure database or with a designated third party service provider in accordance with the local data privacy protection laws
