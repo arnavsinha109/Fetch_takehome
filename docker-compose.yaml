@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  queue_processor:
+    build:
+      context: .
+    container_name: queue_processor
+    ports:
+    - 8000:5000
+    environment:
+    - db_user=postgres
+    - db_pwd=postgres
+    - db_service_name=postgres
+    - aws_access_key_id=xxxxxxxxxxxxx
+    - aws_secret_access_key=xxxxxxxxxxxxxxxxxxxxxxxxxx
+    - AWS_ACCESS_KEY_ID='123'
+    - AWS_SECRET_ACCESS_KEY='xyz'
+
+  localstack:
+    image: fetchdocker/data-takehome-localstack
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+    - HOSTNAME_EXTERNAL=localstack
+  
+  postgres:
+    image: fetchdocker/data-takehome-postgres
+    container_name: postgres
+    environment:
+    - db_user=postgres
+    - db_pwd=postgres
+    
+    ports:
+      - 5430:5432
