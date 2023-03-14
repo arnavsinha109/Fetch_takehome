@@ -184,5 +184,12 @@ docker-compose up --force-recreate
   181452ad-20c3-4e93-86ad-1934c9248903 | android     | b21d1c922d9e9d1b913ade3265baa7fc43c757976dcd7cac3ed2043176655396 | 94b571f680b8f41547047f24e385334265773d33ab643bfc6f1684e21b8b34d9 | ID     |          96 | 2023-03-14
   60b9441c-e39d-406f-bba0-c7ff0e0ee07f | android     | 587f5a111a1f2adb462f778574a91b93de3b29889deca6e25dd363588a5e0ccb | 3102ec6d1310b3db007305eaa5802b3831d4b4ae5f165e21ee1e3298f55e5616 | FR     |          46 | 2023-03-14
  ```
- ## Next Steps for a production ready system
- ### 
+ ## Deployment and Production Readiness
+ ### Deployment Strategy
+ * One possible deployment strategy for this application it to deploy the container app on AWS Fargate clusters using AWS ECS (Elastic Container Service)
+ * The app would perform the same basic functions with more finesse
+ * Other Components to be added -
+     * Heath check capabilities
+         * Monitoring
+         * Logging
+         * CloudWatch Dashboards 
