@@ -162,6 +162,7 @@ docker-compose up --force-recreate
      ]
  }
  root@95a0f9596a7e:/opt/code/localstack#
+ ```
 * You can check the status of your db container using the following steps
  * Open another terminal instance and pass the following commands
  ```
