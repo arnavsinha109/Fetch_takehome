@@ -191,7 +191,8 @@ docker-compose up --force-recreate
     * The app would perform the same basic functions with more finesse
     * Other Components to be added -
         * More queue worker instances for faster processing
-        * Dead Letter Queues to store messages that were unsuccefully dequeued multiple times but could not be processed to stop them from blocking the queue
+        * Dead Letter Queues to store messages that were dequeued multiple times but could not be processed successfully to stop them from blocking the queue
+        * Implementing a credential value (AWS Secret Manager) to secure the different components of the system
         * Heath check capabilities
             * Monitoring
             * Logging
