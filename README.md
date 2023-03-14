@@ -132,6 +132,7 @@ def add_user_info(user_data):
     # close session
     session.close()
 ```
+Note - Here when creating the engine for the DB connection, I have exposed the credentials required to connect to the DB. In an production ready system, this info would be passed to the application using a credential vault like AWS Secrets Manager
 
 ## App Build instructions
 
@@ -144,5 +145,44 @@ git clone git@github.com:arnavsinha109/Fetch_takehome.git
 ```
 docker-compose up --force-recreate
 ```
+* The containers should be up and running now
+* You can check the status of the queue using the following steps-
+ * Open another terminal instance and pass the following commands
+ ```
+ C:\Your\Path> docker exec -it localstack bash
+ root@95a0f9596a7e:/opt/code/localstack# awslocal sqs receive-message --queue-url http://localhost:4566/000000000000/login-queue
+ {
+     "Messages": [
+         {
+             "MessageId": "d6507b56-5e60-4023-93c5-c5a4dc954fb2",
+             "ReceiptHandle": "MThiNWI2NTItNmRhZS00MjRjLTljOGMtN2UwMmNhMjQwMDI1IGFybjphd3M6c3FzOnVzLWVhc3QtMTowMDAwMDAwMDAwMDA6bG9naW4tcXVldWUgZDY1MDdiNTYtNWU2MC00MDIzLTkzYzUtYzVhNGRjOTU0ZmIyIDE2Nzg4MjUxNDUuMTc5OTQyNA==",
+             "MD5OfBody": "e4f1de8c099c0acd7cb05ba9e790ac02",
+             "Body": "{\"user_id\": \"424cdd21-063a-43a7-b91b-7ca1a833afae\", \"app_version\": \"2.3.0\", \"device_type\": \"android\", \"ip\": \"199.172.111.135\", \"locale\": \"RU\", \"device_id\": \"593-47-5928\"}"
+         }
+     ]
+ }
+ root@95a0f9596a7e:/opt/code/localstack#
+* You can check the status of your db container using the following steps
+ * Open another terminal instance and pass the following commands
+ ```
+ C:\Your\Path> docker exec -it postgres bash
+ root@c268d83cb716:/# psql -d postgres -U postgres -p 5432 -h localhost -W
+ Password for user postgres:
+ psql (10.21 (Debian 10.21-1.pgdg90+1))
+ Type "help" for help.
 
+ postgres=# select * from user_logins;
+  user_id | device_type | masked_ip | masked_device_id | locale | app_version | create_date
+ ---------+-------------+-----------+------------------+--------+-------------+-------------
+ (0 rows)
 
+ postgres=# select * from user_logins;
+                user_id                | device_type |                            masked_ip                             |
+                  masked_device_id                         | locale | app_version | create_date
+ --------------------------------------+-------------+------------------------------------------------------------------+------------------------------------------------------------------+--------+-------------+-------------
+  c0173198-76a8-4e67-bfc2-74eaa3bbff57 | ios         | 7b03f7d723535706b4777384fc906d18a4376bb84cebb50dc22c6eb9bddf00cb | a857e702f98990716938a0d74c3dc2dc565e4448833e2cf91c6ab26fc0e9971f | PH     |          26 | 2023-03-14
+  66e0635b-ce36-4ec7-aa9e-8a8fca9b83d4 | ios         | fa7fca28c658d75a751b60e262602e1b11f4149274af6ec0d8c82a8619a51437 | e84fb3e15175d0a2492de6c02a99595c1343db7321ad6bb5f62052edd00a84f8 |        |         221 | 2023-03-14
+  181452ad-20c3-4e93-86ad-1934c9248903 | android     | b21d1c922d9e9d1b913ade3265baa7fc43c757976dcd7cac3ed2043176655396 | 94b571f680b8f41547047f24e385334265773d33ab643bfc6f1684e21b8b34d9 | ID     |          96 | 2023-03-14
+  60b9441c-e39d-406f-bba0-c7ff0e0ee07f | android     | 587f5a111a1f2adb462f778574a91b93de3b29889deca6e25dd363588a5e0ccb | 3102ec6d1310b3db007305eaa5802b3831d4b4ae5f165e21ee1e3298f55e5616 | FR     |          46 | 2023-03-14
+ ```
+ 
