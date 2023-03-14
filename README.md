@@ -12,6 +12,7 @@ The repo sets up a queue processor, which consumes incoming data from an AWS SQS
 ## Functional Requirements
 ### Reading Messages in Queue
 This is achieved by using AWS SDK 'boto3' in Python
+
 '''
 queue_url = "http://localstack:4566/000000000000/login-queue"
 
