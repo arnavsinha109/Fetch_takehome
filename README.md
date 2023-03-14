@@ -204,3 +204,5 @@ docker-compose up --force-recreate
    * Additionally, we might also need to provide users capability to decide the fate of their data by allowing them to delete it if required by the law
 * Assumptions made in the current implementation
    * Data in queue without necessary fields is considered rogue and deleted without being ingested in the DB
+   * App version data when stored in the DB in processed as an integer after replacing the '.' characters in its value in the message to keep up with the DB constrains
+   * In case, the message does not have a viable value for 'ip' or 'device_id', a blank is encrypted using the SHA256 hashing scheme and their masked values will repeat across users with unknown/blank values for these fields 
