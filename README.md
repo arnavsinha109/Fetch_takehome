@@ -9,7 +9,7 @@ The repo sets up a queue processor, which consumes incoming data from an AWS SQS
 * awscli-local installed using pip install awscli-local
 * psql - [install](https://www.postgresql.org/download/)
 
-## Functional Requirements
+## Functional Requirements and their implementations
 ### Reading Messages in Queue
 This is achieved by using AWS SDK 'boto3' in Python
 
