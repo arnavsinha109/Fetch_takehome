@@ -8,6 +8,7 @@ The repo sets up a queue processor, which consumes incoming data from an AWS SQS
 * Python
 * awscli-local installed using pip install awscli-local
 * psql - [install](https://www.postgresql.org/download/)
+Note - The app was built on a Windows machine
 
 ## Functional Requirements and their implementations
 ### Reading Messages in Queue
