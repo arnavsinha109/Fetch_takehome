@@ -184,12 +184,21 @@ docker-compose up --force-recreate
   181452ad-20c3-4e93-86ad-1934c9248903 | android     | b21d1c922d9e9d1b913ade3265baa7fc43c757976dcd7cac3ed2043176655396 | 94b571f680b8f41547047f24e385334265773d33ab643bfc6f1684e21b8b34d9 | ID     |          96 | 2023-03-14
   60b9441c-e39d-406f-bba0-c7ff0e0ee07f | android     | 587f5a111a1f2adb462f778574a91b93de3b29889deca6e25dd363588a5e0ccb | 3102ec6d1310b3db007305eaa5802b3831d4b4ae5f165e21ee1e3298f55e5616 | FR     |          46 | 2023-03-14
  ```
- ## Deployment and Production Readiness
- ### Deployment Strategy
- * One possible deployment strategy for this application it to deploy the container app on AWS Fargate clusters using AWS ECS (Elastic Container Service)
- * The app would perform the same basic functions with more finesse
- * Other Components to be added -
-     * Heath check capabilities
-         * Monitoring
-         * Logging
-         * CloudWatch Dashboards 
+## Additional thoughts and comments on Deployment and Production Readiness Strategies
+* One possible deployment strategy for this application it to deploy the container app on AWS Fargate clusters using AWS ECS (Elastic Container Service)
+* The app would perform the same basic functions with more finesse
+* Other Components to be added -
+    * More queue worker instances for faster processing
+    * Dead Letter Queues to store messages that were unsuccefully dequeued multiple times but could not be processed to stop them from blocking the queue
+    * Heath check capabilities
+        * Monitoring
+        * Logging
+        * CloudWatch Dashboards
+        * Alert system to generate alert in case some service goes down
+* We could use queue based scaling as a scale out strategy
+   * In case the size of the queue increases because of increase in dataflow, we can configure the Fargate app to scale out to handle the increase in data
+* PII data handling could be done by storing it in secure database or with a designated third party service provider in accordance with the local data privacy protection laws
+   * For instance, the data could be stored locally for regions with GDPR like data privacy and security laws
+   * Additionally, we might also need to provide users capability to decide the fate of their data by allowing them to delete it if required by the law
+* Assumptions made in the current implementation
+   * Data in queue without necessary fields is considered rogue and deleted without being ingested in the DB
