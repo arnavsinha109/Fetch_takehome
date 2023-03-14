@@ -1,7 +1,7 @@
 # Fetch_takehome
 
 ## Overview
-The repo sets up a queue processor, which consumes incoming data from an AWS SQS queue hosted on localstack container and processes and ingests it to a POSTGRES DB
+The repo sets up a queue processor, which consumes incoming data from an AWS SQS queue hosted on localstack container and processes and ingests it to a POSTGRES DB. Find a video demo of the app here - [Demo](https://drive.google.com/file/d/1pxPzOQpuoLMQKhVgoA3Wi6GYpq4fPo5A/view?usp=sharing) 
 
 ## System Requirements
 * Docker - [install](https://docs.docker.com/get-docker/)
