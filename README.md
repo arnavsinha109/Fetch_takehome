@@ -142,7 +142,7 @@ Note - Here when creating the engine for the DB connection, I have exposed the c
 ```
 git clone git@github.com:arnavsinha109/Fetch_takehome.git
 ```
-* Go inside the cloned repo
+* Go inside the cloned repo to start building the containers. Find a video demo of the process here - [Demo](https://drive.google.com/file/d/1pxPzOQpuoLMQKhVgoA3Wi6GYpq4fPo5A/view?usp=sharing) 
 * Build the docker containers using following command
 ```
 docker-compose up --force-recreate
