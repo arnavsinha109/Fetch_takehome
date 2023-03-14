@@ -146,7 +146,7 @@ git clone git@github.com:arnavsinha109/Fetch_takehome.git
 docker-compose up --force-recreate
 ```
 * The containers should be up and running now
-* You can check the status of the queue by passing the following commands in another terminal instance
+* You can check the status of the queue by passing the following commands in another terminal instance. (Note- If the queue is not empty then it might show a message similar to the one given below, else it will return nothing)
  ```
  C:\Your\Path> docker exec -it localstack bash
  root@95a0f9596a7e:/opt/code/localstack# awslocal sqs receive-message --queue-url http://localhost:4566/000000000000/login-queue
@@ -162,7 +162,7 @@ docker-compose up --force-recreate
  }
  root@95a0f9596a7e:/opt/code/localstack#
  ```
-* You can check the status of your db container by passing the following commands in another terminal instance
+* You can check the status of your db container by passing the following commands in another terminal instance (Note- if the queue processor is not running, then the table should be empty, else it should show some data)
  ```
  C:\Your\Path> docker exec -it postgres bash
  root@c268d83cb716:/# psql -d postgres -U postgres -p 5432 -h localhost -W
