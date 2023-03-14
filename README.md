@@ -14,11 +14,11 @@ The repo sets up a queue processor, which consumes incoming data from an AWS SQS
 This is achieved by using AWS SDK 'boto3' in Python
 
 '''
+
 queue_url = "http://localstack:4566/000000000000/login-queue"
 
 sqs = boto3.client("sqs", endpoint_url="http://localstack:4566/_aws/sqs/", region_name='us-east-1')
 
-response = sqs.receive_message(
-    QueueUrl=queue_url, MaxNumberOfMessages=10, WaitTimeSeconds=20
-)
+response = sqs.receive_message(QueueUrl=queue_url, MaxNumberOfMessages=10, WaitTimeSeconds=20)
+
 '''
