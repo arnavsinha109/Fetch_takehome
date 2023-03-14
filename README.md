@@ -25,7 +25,7 @@ response = sqs.receive_message(QueueUrl=queue_url, MaxNumberOfMessages=10, WaitT
 
 Note - Set AWS default_region to 'us-east-1' and pass dummy AWS credentials - AWS_ACCESS_KEY_ID='123', AWS_SECRET_ACCESS_KEY='xyz' as environment variables for your application in docker-compose.yaml file to avoid boto3 errors even when working with localstack
 
-## Process data efficiently
+### Process data efficiently
 
 Achieved by parsing the message received as JSON and processed to handle anomalies before being ingested in the DB in the following steps-
 * Parse message['Body'] as JSON
@@ -55,7 +55,7 @@ def process_messages(message):
     # ingest data in the user_logins table
     add_user_info(msg_json)
 ```
-## Mask PII data
+### Mask PII data
 
 Achieved by using SHA256 hashing in the create_hash() function on the msg_json["ip"] and msg_json["device_id"] after the message JSON passes sanity check
 We retain only the first 256 characters of the hash generated to stay within the attribute constraints of "masked_ip" and "masked_device_id" fields in the DB
@@ -74,7 +74,7 @@ def create_hash(string):
     return hash_hex
 ```
 
-## Connect to POSTGRES db
+### Connect to POSTGRES db
 
 After the message passes sanity check. We are ready to ingest the user login data in the POSTGRES db. We do that using SQLAlchemy ORM available in Python.
 
@@ -132,3 +132,17 @@ def add_user_info(user_data):
     # close session
     session.close()
 ```
+
+## App Build instructions
+
+* Clone the git repository in your local system using the following command in the desired location
+```
+git clone git@github.com:arnavsinha109/Fetch_takehome.git
+```
+* Go inside the cloned repo
+* Build the docker containers using following command
+```
+docker-compose up --force-recreate
+```
+
+
